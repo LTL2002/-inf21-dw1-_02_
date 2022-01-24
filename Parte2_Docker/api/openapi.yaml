@@ -1,0 +1,634 @@
+openapi: 3.0.0
+info:
+  title: Movies
+  description: A Movies REST API
+  contact:
+    name: A038472@ismai.pt | A038115@ismai.pt | A039088@ismai.pt
+    email: A038472@ismai.pt
+  version: 0.0.1
+servers:
+- url: http://localhost:8080
+  description: Localhost
+  variables:
+    basePath:
+      default: /
+paths:
+  /movies:
+    get:
+      tags:
+      - MoviesController
+      summary: Retrieve Movies
+      operationId: retrieveMovies
+      responses:
+        "200":
+          description: Array of Movie model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+                x-content-type: application/json
+      x-swagger-router-controller: MoviesController
+    post:
+      tags:
+      - MoviesController
+      summary: Create Movie
+      operationId: createMovie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+            examples:
+              MovieExample01:
+                $ref: '#/components/examples/MovieExample01'
+              MovieExample02:
+                $ref: '#/components/examples/MovieExample02'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Movie'
+            examples:
+              MovieExample01:
+                $ref: '#/components/examples/MovieExample01'
+              MovieExample02:
+                $ref: '#/components/examples/MovieExample02'
+      responses:
+        "200":
+          description: Create a Movie model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        "400":
+          description: Bad request
+      x-swagger-router-controller: MoviesController
+  /movies/{id}:
+    get:
+      tags:
+      - MoviesController
+      summary: Retrieve Movie
+      operationId: retrieveMovie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Retrieve Movie Id 1
+            value: 1
+          two:
+            summary: Retrieve Movie Id 2
+            value: 2
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        "400":
+          description: Bad request
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: MoviesController
+    delete:
+      tags:
+      - MoviesController
+      summary: Delete Movie
+      operationId: deleteMovie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Delete Movie id 1
+            value: 1
+          two:
+            summary: Delete Movie id 2
+            value: 2
+      responses:
+        "204":
+          description: Deleted Successfully
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: MoviesController
+  /producers:
+    get:
+      tags:
+      - ProducersController
+      summary: Retrieve Producers
+      operationId: retrieveProducers
+      responses:
+        "200":
+          description: Array of Producers model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producer'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Producer'
+      x-swagger-router-controller: ProducersController
+    post:
+      tags:
+      - ProducersController
+      summary: Create Producer
+      operationId: createProducer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+            examples:
+              ProducerExample01:
+                $ref: '#/components/examples/ProducerExample01'
+              ProducerExample02:
+                $ref: '#/components/examples/ProducerExample02'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Producer'
+            examples:
+              ProducerExample01:
+                $ref: '#/components/examples/ProducerExample01'
+              ProducerExample02:
+                $ref: '#/components/examples/ProducerExample02'
+      responses:
+        "200":
+          description: Create a Producer model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Producer'
+        "400":
+          description: Bad request
+      x-swagger-router-controller: ProducersController
+  /producers/{id}:
+    get:
+      tags:
+      - ProducersController
+      summary: Retrieve Producer
+      operationId: retrieveProducer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Retrieve Producer Id 1
+            value: 1
+          two:
+            summary: Retrieve Producer Id 2
+            value: 2
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Producer'
+        "400":
+          description: Bad request
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: ProducersController
+    delete:
+      tags:
+      - ProducersController
+      summary: Delete Producer
+      operationId: deleteProducer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Delete Producer id 1
+            value: 1
+          two:
+            summary: Delete Producer id 2
+            value: 2
+      responses:
+        "204":
+          description: Deleted Successfully
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: ProducersController
+  /countries:
+    get:
+      tags:
+      - CountriesController
+      summary: Retrieve Countries
+      operationId: retrieveCountries
+      responses:
+        "200":
+          description: Array of Countries model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+                x-content-type: application/json
+      x-swagger-router-controller: CountriesController
+    post:
+      tags:
+      - CountriesController
+      summary: Create Country
+      operationId: createCountry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Country'
+            examples:
+              CountryExample01:
+                $ref: '#/components/examples/CountryExample01'
+              CountryExample02:
+                $ref: '#/components/examples/CountryExample02'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Country'
+            examples:
+              CountryExample01:
+                $ref: '#/components/examples/CountryExample01'
+              CountryExample02:
+                $ref: '#/components/examples/CountryExample02'
+      responses:
+        "200":
+          description: Create a Country model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Country'
+        "400":
+          description: Bad request
+      x-swagger-router-controller: CountriesController
+  /countries/{id}:
+    get:
+      tags:
+      - CountriesController
+      summary: Retrieve Country
+      operationId: retrieveCountry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Retrieve Country Id 1
+            value: 1
+          two:
+            summary: Retrieve Country Id 2
+            value: 2
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Country'
+        "400":
+          description: Bad request
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: CountriesController
+    delete:
+      tags:
+      - CountriesController
+      summary: Delete Country
+      operationId: deleteCountry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Delete Country id 1
+            value: 1
+          two:
+            summary: Delete Country id 2
+            value: 2
+      responses:
+        "204":
+          description: Deleted Successfully
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: CountriesController
+  /categories:
+    get:
+      tags:
+      - CategoriesController
+      summary: Retrieve Categories
+      operationId: retrieveCategories
+      responses:
+        "200":
+          description: Array of Categories model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+                x-content-type: application/json
+      x-swagger-router-controller: CategoriesController
+    post:
+      tags:
+      - CategoriesController
+      summary: Create Category
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+            examples:
+              CategoryExample01:
+                $ref: '#/components/examples/CategoryExample01'
+              CategoryExample02:
+                $ref: '#/components/examples/CategoryExample02'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Category'
+            examples:
+              CategoryExample01:
+                $ref: '#/components/examples/CategoryExample01'
+              CategoryExample02:
+                $ref: '#/components/examples/CategoryExample02'
+      responses:
+        "200":
+          description: Create a Country model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Country'
+        "400":
+          description: Bad request
+      x-swagger-router-controller: CategoriesController
+  /categories/{id}:
+    get:
+      tags:
+      - CategoriesController
+      summary: Retrieve Category
+      operationId: retrieveCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Retrieve Category Id 1
+            value: 1
+          two:
+            summary: Retrieve Category Id 2
+            value: 2
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Category'
+        "400":
+          description: Bad request
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: CategoriesController
+    delete:
+      tags:
+      - CategoriesController
+      summary: Delete Category
+      operationId: deleteCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+        examples:
+          one:
+            summary: Delete Category id 1
+            value: 1
+          two:
+            summary: Delete Category id 2
+            value: 2
+      responses:
+        "204":
+          description: Deleted Successfully
+        "404":
+          description: Invalid ID
+      x-swagger-router-controller: CategoriesController
+components:
+  schemas:
+    Movie:
+      title: Movie
+      required:
+      - director
+      - duration
+      - idcategory
+      - idcountry
+      - idmovies
+      - idproducer
+      - name
+      - yearrec
+      type: object
+      properties:
+        idmovies:
+          type: integer
+          format: int64
+        name:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        yearrec:
+          type: integer
+          format: int32
+        director:
+          type: string
+        idproducer:
+          type: integer
+          format: int32
+        idcategory:
+          type: integer
+          format: int32
+        idcountry:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        idmovies: 1
+        name: Encanto
+        duration: 200
+        yearrec: 2021
+        director: Joe Biden
+        idproducer: 1
+        idcategory: 3
+        idcountry: 1
+    Producer:
+      title: Producer
+      required:
+      - idproducer
+      - producername
+      type: object
+      properties:
+        idproducer:
+          type: integer
+          format: int64
+        producername:
+          type: string
+      additionalProperties: false
+      example:
+        idproducer: 1
+        producername: Pixar
+    Country:
+      title: Country
+      required:
+      - idcountry
+      - countryname
+      type: object
+      properties:
+        idcountry:
+          type: integer
+          format: int64
+        countryname:
+          type: string
+      additionalProperties: false
+      example:
+        idcountry: 1
+        countryname: Portugal
+    Category:
+      title: Category
+      required:
+      - idcategory
+      - category
+      type: object
+      properties:
+        idcategory:
+          type: integer
+          format: int64
+        category:
+          type: string
+      additionalProperties: false
+      example:
+        idcategory: 1
+        category: Horror
+  examples:
+    MovieExample01:
+      value:
+        idmovies: 1
+        name: Encanto
+        duration: 200
+        director: Joe Biden
+        yearrec: 2021
+        idproducer: 1
+        idcategory: 3
+        idcountry: 2
+    MovieExample02:
+      value:
+        idmovies: 2
+        name: Brother Bear
+        duration: 165
+        director: Donald Trump
+        yearrec: 2002
+        idproducer: 1
+        idcategory: 3
+        idcountry: 2
+    ProducerExample01:
+      value:
+        idproducer: 1
+        producername: Pixar
+    ProducerExample02:
+      value:
+        idproducer: 2
+        producername: Disney
+    CountryExample01:
+      value:
+        idcountry: 1
+        countryname: Portugal
+    CountryExample02:
+      value:
+        idcountry: 2
+        countryname: Italy
+    CategoryExample01:
+      value:
+        idcategory: 1
+        category: Horror
+    CategoryExample02:
+      value:
+        idcategory: 2
+        category: Documentary    
